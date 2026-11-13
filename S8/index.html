@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a101b">
+  <title>TERRA · Atlas planetario</title>
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true">
+        <circle cx="24" cy="24" r="17" />
+        <ellipse cx="24" cy="24" rx="8" ry="17" />
+        <path d="M7 24h34M10 16h28M10 32h28" />
+        <path class="brand-orbit" d="M4 31c8 8 28 11 39-2" />
+      </svg>
+      <div><p class="brand-kicker">Archivo de fenómenos terrestres</p><h1>TERRA <span>— Atlas planetario</span></h1></div>
+    </div>
+    <span class="course"><span class="status-dot"></span> INFORMÁTICA GRÁFICA <i>/</i> S8</span>
+  </header>
+
+  <main class="atlas">
+    <section id="viewer" class="viewer" aria-label="Globo terrestre interactivo">
+      <div class="view-label"><span>●</span> <strong id="view-mode">Exploración histórica</strong><small id="view-period">Todo el periodo</small></div>
+      <div class="navigation" aria-label="Controles de cámara">
+        <button id="zoom-in" aria-label="Acercar" title="Acercar">+</button>
+        <button id="zoom-out" aria-label="Alejar" title="Alejar">−</button>
+        <button id="reset-view" aria-label="Restablecer vista" title="Restablecer vista">↺</button>
+        <button id="orbit" aria-label="Pausar giro automático" title="Pausar giro automático">Ⅱ</button>
+      </div>
+      <p class="gesture">Arrastra para girar <span>·</span> Usa la rueda o pellizca para acercar</p>
+      <section id="detail" class="detail" aria-label="Ficha del evento" hidden></section>
+      <p id="error" class="viewer-error" role="alert" hidden></p>
+    </section>
+
+    <aside class="sidebar" aria-label="Herramientas de exploración">
+      <section class="panel search">
+        <h2><label for="search">Localizador</label></h2>
+        <input id="search" type="search" placeholder="Busca un evento o lugar" autocomplete="off" aria-controls="results">
+        <ul id="results" class="results" aria-label="Resultados" hidden></ul>
+        <p id="search-status" class="sr-only" role="status"></p>
+      </section>
+
+      <section class="panel">
+        <h2>Capas del mapa</h2>
+        <label class="layer"><i class="key quake" aria-hidden="true"></i><span>Terremotos</span><small id="quake-count">…</small><input id="show-quakes" type="checkbox" checked></label>
+        <label class="layer"><i class="key volcano" aria-hidden="true"></i><span>Volcanes del Holoceno</span><small id="volcano-count">…</small><input id="show-volcanoes" type="checkbox" checked></label>
+        <label class="layer"><i class="key tsunami" aria-hidden="true"></i><span>Tsunamis</span><small id="tsunami-count">…</small><input id="show-tsunamis" type="checkbox" checked></label>
+        <label class="layer"><i class="key meteorite" aria-hidden="true"></i><span>Caídas de meteoritos</span><small id="meteorite-count">…</small><input id="show-meteorites" type="checkbox" checked></label>
+        <label class="layer"><i class="key plate" aria-hidden="true"></i><span>Límites de placas</span><input id="show-plates" type="checkbox" checked></label>
+        <label class="range-label speed-label" for="orbit-speed">Velocidad del giro <output id="orbit-speed-value" for="orbit-speed">1×</output></label>
+        <input id="orbit-speed" type="range" min="0.25" max="3" value="1" step="0.25">
+      </section>
+
+      <section class="panel">
+        <h2>Catálogo sísmico</h2>
+        <div class="modes" role="group" aria-label="Modo sísmico">
+          <button id="historic" aria-pressed="true">Histórico</button>
+          <button id="recent" aria-pressed="false">En directo</button>
+        </div>
+        <label class="range-label" for="magnitude">Magnitud mínima <output id="mag-value" for="magnitude"></output></label>
+        <input id="magnitude" type="range" min="6" max="9.5" value="7" step="0.1">
+        <div class="range-ends"><span id="mag-min">6,0</span><span>9,5</span></div>
+        <div id="recent-options" hidden>
+          <p id="recent-status" class="muted" role="status"></p>
+          <button id="refresh">Actualizar USGS</button>
+        </div>
+      </section>
+
+      <section class="panel" id="timeline">
+        <h2>Exploración temporal</h2>
+        <label class="range-label" for="year">Eventos hasta <output id="year-value" for="year">2025</output></label>
+        <input id="year" type="range" min="0" max="1000" value="1000">
+        <div class="range-ends"><span id="first-year"></span><span>2025</span></div>
+        <label class="year-entry">Ir al año <input id="year-entry" type="number" max="2025" value="2025" step="1"><small>Usa un número negativo para a. C.</small></label>
+        <p class="muted">Los volcanes aparecen desde su primera erupción confirmada. «Todo el periodo» incluye también los que carecen de fecha confirmada.</p>
+        <label class="speed-label playback-speed" for="playback-speed">Velocidad de reproducción
+          <select id="playback-speed">
+            <option value="year">1 año/s</option>
+            <option value="0.5">0,5×</option>
+            <option value="1" selected>1×</option>
+            <option value="2">2×</option>
+            <option value="4">4×</option>
+          </select>
+        </label>
+        <p class="muted playback-note">Los círculos indican radios de referencia. Las estelas de meteoritos son ilustrativas.</p>
+        <div class="timeline-actions">
+          <button id="play" aria-pressed="false">▶ Reproducir</button>
+          <button id="all-years">Todo el periodo</button>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <footer class="footer"><span>Datos de <a href="https://earthquake.usgs.gov/" target="_blank" rel="noopener">USGS</a>, <a href="https://www.ncei.noaa.gov/products/natural-hazards" target="_blank" rel="noopener">NOAA</a>, <a href="https://volcano.si.edu/" target="_blank" rel="noopener">Smithsonian GVP</a> y <a href="https://github.com/fraxen/tectonicplates" target="_blank" rel="noopener">PB2002</a> · Imágenes de <a href="https://www.solarsystemscope.com/textures/" target="_blank" rel="noopener">Solar System Scope</a>, <a href="https://science.nasa.gov/earth/earth-observatory/blue-marble-next-generation/topography-bathymetry-maps/" target="_blank" rel="noopener">NASA</a> y <a href="https://pnoa.ign.es/" target="_blank" rel="noopener">© PNOA–SCNE</a></span><span>Autor: Marcos González Gómez · EII–IG</span></footer>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
+
