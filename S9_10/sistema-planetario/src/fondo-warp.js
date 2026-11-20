@@ -1,8 +1,7 @@
-import fragmentShader from './warp-nebula';
 
 // Se conserva el shader 2D: la composición se calcula en coordenadas de pantalla.
 // Solo sustituye el material del antiguo fondo; no ilumina ni altera los astros.
-export function crearFondoWarp(THREE) {
+function crearFondoWarp(THREE) {
     const material = new THREE.ShaderMaterial({
         uniforms: {
             u_resolution: { value: new THREE.Vector2(1, 1) },

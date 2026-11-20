@@ -1,29 +1,23 @@
 
-import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { FlyControls } from "three/examples/jsm/controls/FlyControls";
-import { TransformControls } from "three/examples/jsm/controls/TransformControls";
-import GUI from "lil-gui";
-import { crearFondoWarp } from "./fondo-warp";
 
 
 // Texturas
-import texSol from "./textures/8k_sun.jpg";
-import texMercurio from "./textures/8k_mercury.jpg";
-import texVenus from "./textures/8k_venus_surface.jpg";
-import texTierra from "./textures/8k_earth_daymap.jpg";
-import texNubes from "./textures/8k_earth_clouds.jpg";
-import texSpecular from "./textures/8k_earth_specular_map.tif";
-import texMarte from "./textures/8k_mars.jpg";
-import texJupiter from "./textures/8k_jupiter.jpg";
-import texSaturno from "./textures/8k_saturn.jpg";
-import texUrano from "./textures/2k_uranus.jpg";
-import texNeptuno from "./textures/2k_neptune.jpg";
-import texLuna from "./textures/8k_moon.jpg";
-import texCeres from "./textures/4k_ceres_fictional.jpg";
-import texEris from "./textures/4k_eris_fictional.jpg";
-import texMakemake from "./textures/4k_makemake_fictional.jpg";
-import texAnillos from "./textures/8k_saturn_ring_alpha.png";
+const texSol = "./src/Textures/8k_sun.jpg";
+const texMercurio = "./src/Textures/8k_mercury.jpg";
+const texVenus = "./src/Textures/8k_venus_surface.jpg";
+const texTierra = "./src/Textures/8k_earth_daymap.jpg";
+const texNubes = "./src/Textures/8k_earth_clouds.jpg";
+const texSpecular = "./src/Textures/8k_earth_specular_map.tif";
+const texMarte = "./src/Textures/8k_mars.jpg";
+const texJupiter = "./src/Textures/8k_jupiter.jpg";
+const texSaturno = "./src/Textures/8k_saturn.jpg";
+const texUrano = "./src/Textures/2k_uranus.jpg";
+const texNeptuno = "./src/Textures/2k_neptune.jpg";
+const texLuna = "./src/Textures/8k_moon.jpg";
+const texCeres = "./src/Textures/4k_ceres_fictional.jpg";
+const texEris = "./src/Textures/4k_eris_fictional.jpg";
+const texMakemake = "./src/Textures/4k_makemake_fictional.jpg";
+const texAnillos = "./src/Textures/8k_saturn_ring_alpha.png";
 
 // Variables generales
 let scene, renderer, camera, cameraNave;

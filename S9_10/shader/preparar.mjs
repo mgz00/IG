@@ -6,5 +6,4 @@ const bytes=Buffer.byteLength(shader);
 if(bytes>512)throw Error(`Supera el límite: ${bytes} bytes`);
 writeFileSync(new URL('shaders/disformidad.frag',root),shader);
 writeFileSync(new URL('shader-sources.js',root),'// Generado con node preparar.mjs\nwindow.WARP='+JSON.stringify({shader,readable,bytes})+';\n');
-writeFileSync(new URL('sistema-planetario/src/warp-nebula.js',root),'// Generado con node preparar.mjs desde shaders/disformidad.frag\nexport default '+JSON.stringify(shader)+';\n');
 console.log(`Disformidad: ${bytes} bytes UTF-8, incluidos precisión y uniforms.`);

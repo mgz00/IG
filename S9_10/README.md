@@ -16,15 +16,19 @@ El shader minificado ocupa **504 bytes UTF-8**, incluidos precisión y uniforms,
 
 ## 2. Capturas y demostración
 
-![Shader de la Disformidad](./preview.png)
+![Shader de la Disformidad](./shader/preview.png)
 
-*Figura 1. Captura real del shader en ejecución.*
+*Figura 1. Captura del shader sin HUD.*
+
+![Animación del shader](./shader/demo.gif)
 
 ![Sistema planetario con la Disformidad de fondo](./sistema-planetario/preview.png)
 
 *Figura 2. Integración del mismo efecto en la copia del sistema planetario.*
 
-La animación se puede ver abriendo [el visor independiente](./index.html). La copia del sistema planetario incluye sus [instrucciones de ejecución](./sistema-planetario/README.md).
+![Animación del sistema planetario](./sistema-planetario/demo.gif)
+
+La animación se puede ver abriendo [el visor independiente](./shader/index.html). La copia del sistema planetario incluye sus [instrucciones de ejecución](./sistema-planetario/README.md).
 
 ## 3. Funcionalidades
 
@@ -39,21 +43,25 @@ La animación se puede ver abriendo [el visor independiente](./index.html). La c
 
 ## 4. Controles
 
-En el visor independiente, **Pausar/Reanudar** controla la animación y **H** muestra u oculta el panel. Los enlaces permiten descargar el código minificado y el comentado. En el sistema planetario se conservan sus controles originales.
+El visor independiente muestra únicamente el shader animado a pantalla completa, sin HUD ni controles. En el sistema planetario se conservan sus controles originales.
 
 ## 5. Instalación y ejecución
 
-El visor no necesita instalar dependencias: abrir `index.html` con un navegador que admita WebGL.
+Las carpetas `shader/` y `sistema-planetario/` son proyectos independientes. Para CodeSandbox, subir el contenido de una de ellas como raíz del proyecto.
 
-Para usar el shader en [el editor de The Book of Shaders](https://editor.thebookofshaders.com/), sustituir el código del editor por el contenido completo de `shaders/disformidad.frag`, sin etiquetas HTML ni comillas.
+**Shader:** abrir `shader/index.html` con Live Server o importar el contenido de `shader/` como proyecto estático en CodeSandbox. No necesita dependencias.
+
+**Sistema planetario:** importar el contenido de `sistema-planetario/` como proyecto estático, con su `index.html` en la raíz. Utiliza JavaScript clásico y bibliotecas locales: no necesita npm ni Parcel. En VS Code, abrir ese HTML con Live Server.
+
+Para usar el shader en [el editor de The Book of Shaders](https://editor.thebookofshaders.com/), sustituir el código del editor por el contenido completo de `shader/shaders/disformidad.frag`, sin etiquetas HTML ni comillas.
 
 Después de modificar la versión comentada, ejecutar:
 
 ```sh
-node preparar.mjs
+node shader/preparar.mjs
 ```
 
-Este comando genera el minificado, los datos del visor y el módulo usado por Three.js, y falla si se superan 512 bytes. Para recompilar la integración, ejecutar `npm run build` desde `sistema-planetario`.
+Este comando genera el minificado y los datos del visor, y falla si se superan 512 bytes. Las carpetas son independientes: si se modifica el shader, copiar el GLSL actualizado al módulo `sistema-planetario/src/warp-nebula.js` antes de recargar la integración.
 
 ## 6. Desarrollo del shader
 
@@ -85,19 +93,15 @@ El patrón se calcula en coordenadas de pantalla: mantiene su composición al gi
 
 ## 7. Estructura del proyecto
 
-- `shaders/disformidad.frag`: shader compacto de 504 bytes.
-- `shaders/disformidad-readable.frag`: versión equivalente comentada.
-- `index.html`: página para ver el shader independiente.
-- `visor.js`: configura WebGL, dibuja el shader y controla la animación.
-- `shader-sources.js`: datos generados del shader para abrir el visor sin servidor.
-- `preparar.mjs`: generación y comprobación del tamaño.
-- `sistema-planetario/`: copia de la práctica con el fondo integrado.
+- `shader/`: visor independiente, GLSL compacto y comentado, generador, captura, GIF y documentación propia.
+- `sistema-planetario/`: aplicación Three.js independiente, bibliotecas locales, texturas, captura, GIF y documentación propia.
+- `README.md`: documentación general de la práctica.
 
 ## 8. Verificación
 
 Se comprueban compilación en WebGL 1 y adaptación de salida a GLSL ES 3.00 en WebGL 2, igualdad de píxeles entre código comentado y minificado, animación temporal, contraste y alfa opaco, en horizontal y vertical. Los archivos auxiliares de estas pruebas se han retirado de la entrega final.
 
-La integración se compila con Parcel y se prueba en Chrome, incluyendo las dos cámaras y la pausa. No se ha probado manualmente el editor remoto de The Book of Shaders; el código utiliza su estructura estándar de fragment shader y uniforms.
+La integración se sirve como página estática con scripts clásicos. Se ha comprobado en Chrome el render de esta versión y la carga sin errores de scripts y texturas. Las cámaras y la pausa se comprobaron durante la integración original. No se ha probado manualmente el editor remoto de The Book of Shaders; el código utiliza su estructura estándar de fragment shader y uniforms.
 
 ## 9. Fuentes y referencias
 
