@@ -16,6 +16,9 @@ El shader minificado ocupa **504 bytes UTF-8**, incluidos precisión y uniforms,
 
 ## 2. Capturas y demostración
 
+- [Ver el shader en CodeSandbox](https://codesandbox.io/p/sandbox/musing-minsky-hrzvxn)
+- [Ver el sistema planetario con el shader en CodeSandbox](https://codesandbox.io/p/sandbox/practica-9-sistema-lfpypg)
+
 ![Shader de la Disformidad](./shader/preview.png)
 
 *Figura 1. Captura del shader sin HUD.*
@@ -28,7 +31,7 @@ El shader minificado ocupa **504 bytes UTF-8**, incluidos precisión y uniforms,
 
 ![Animación del sistema planetario](./sistema-planetario/demo.gif)
 
-La animación se puede ver abriendo [el visor independiente](./shader/index.html). La copia del sistema planetario incluye sus [instrucciones de ejecución](./sistema-planetario/README.md).
+La animación se puede ver abriendo [el visor independiente](./shader/index.html) y la integración desde [el sistema planetario](./sistema-planetario/index.html). Las instrucciones de ejecución están en el apartado 5.
 
 ## 3. Funcionalidades
 
@@ -47,11 +50,34 @@ El visor independiente muestra únicamente el shader animado a pantalla completa
 
 ## 5. Instalación y ejecución
 
-Las carpetas `shader/` y `sistema-planetario/` son proyectos independientes. Para CodeSandbox, subir el contenido de una de ellas como raíz del proyecto.
+Las carpetas `shader/` y `sistema-planetario/` son proyectos independientes. Ambos utilizan JavaScript clásico y se ejecutan como páginas estáticas, sin instalar paquetes ni compilar.
 
-**Shader:** abrir `shader/index.html` con Live Server o importar el contenido de `shader/` como proyecto estático en CodeSandbox. No necesita dependencias.
+### 5.1. Desde Visual Studio Code
 
-**Sistema planetario:** importar el contenido de `sistema-planetario/` como proyecto estático, con su `index.html` en la raíz. Utiliza JavaScript clásico y bibliotecas locales: no necesita npm ni Parcel. En VS Code, abrir ese HTML con Live Server.
+1. Abrir la carpeta `S9_10` en Visual Studio Code.
+2. Instalar la extensión **Live Server** si no está instalada.
+3. Para ver **solo el shader**, hacer clic derecho en `shader/index.html` y seleccionar **Open with Live Server**. Se abrirá en el navegador, animado y sin HUD.
+4. Para ver **el sistema planetario con el shader de fondo**, hacer clic derecho en `sistema-planetario/index.html` y seleccionar **Open with Live Server**. Se abrirá la escena con sus controles, planetas y texturas.
+
+Como alternativa para el sistema planetario, abrir una terminal desde `S9_10` y ejecutar:
+
+```sh
+cd sistema-planetario
+node servidor.mjs
+```
+
+Abrir `http://127.0.0.1:8100` en el navegador. Para detener el servidor, pulsar **Ctrl+C** en la terminal. Si el puerto 8100 ya está ocupado por este servidor, abrir directamente esa dirección.
+
+### 5.2. Desde CodeSandbox
+
+Para ver las versiones publicadas, abrir:
+
+- **Shader independiente:** [abrir en CodeSandbox](https://codesandbox.io/p/sandbox/musing-minsky-hrzvxn).
+- **Sistema planetario con el shader:** [abrir en CodeSandbox](https://codesandbox.io/p/sandbox/practica-9-sistema-lfpypg).
+
+Para crear una copia propia, crear un proyecto estático HTML/JavaScript y subir el **contenido** de `shader/` o de `sistema-planetario/`, según lo que se quiera visualizar. En ambos casos, su `index.html` debe quedar en la raíz del proyecto. Abrir la vista previa; no hace falta utilizar la terminal.
+
+### 5.3. Código GLSL y edición
 
 Para usar el shader en [el editor de The Book of Shaders](https://editor.thebookofshaders.com/), sustituir el código del editor por el contenido completo de `shader/shaders/disformidad.frag`, sin etiquetas HTML ni comillas.
 
@@ -61,7 +87,7 @@ Después de modificar la versión comentada, ejecutar:
 node shader/preparar.mjs
 ```
 
-Este comando genera el minificado y los datos del visor, y falla si se superan 512 bytes. Las carpetas son independientes: si se modifica el shader, copiar el GLSL actualizado al módulo `sistema-planetario/src/warp-nebula.js` antes de recargar la integración.
+Este comando genera el minificado y los datos del visor, y falla si se superan 512 bytes. Las carpetas son independientes: si se modifica el shader, actualizar la constante `fragmentShader` de `sistema-planetario/src/warp-nebula.js` con el GLSL actualizado antes de recargar la integración.
 
 ## 6. Desarrollo del shader
 
@@ -93,15 +119,15 @@ El patrón se calcula en coordenadas de pantalla: mantiene su composición al gi
 
 ## 7. Estructura del proyecto
 
-- `shader/`: visor independiente, GLSL compacto y comentado, generador, captura, GIF y documentación propia.
-- `sistema-planetario/`: aplicación Three.js independiente, bibliotecas locales, texturas, captura, GIF y documentación propia.
+- `shader/`: visor independiente, GLSL compacto y comentado, generador, captura y GIF.
+- `sistema-planetario/`: aplicación Three.js independiente, bibliotecas locales, texturas, captura y GIF.
 - `README.md`: documentación general de la práctica.
 
 ## 8. Verificación
 
-Se comprueban compilación en WebGL 1 y adaptación de salida a GLSL ES 3.00 en WebGL 2, igualdad de píxeles entre código comentado y minificado, animación temporal, contraste y alfa opaco, en horizontal y vertical. Los archivos auxiliares de estas pruebas se han retirado de la entrega final.
+Durante el desarrollo se comprobaron compilación en WebGL 1 y adaptación de salida a GLSL ES 3.00 en WebGL 2, igualdad de píxeles entre código comentado y minificado, animación temporal, contraste y alfa opaco, en horizontal y vertical. Los archivos auxiliares de estas pruebas se han retirado de la entrega final.
 
-La integración se sirve como página estática con scripts clásicos. Se ha comprobado en Chrome el render de esta versión y la carga sin errores de scripts y texturas. Las cámaras y la pausa se comprobaron durante la integración original. No se ha probado manualmente el editor remoto de The Book of Shaders; el código utiliza su estructura estándar de fragment shader y uniforms.
+La integración se sirve como página estática con scripts clásicos. Se ha comprobado en Chrome el render de esta versión y la carga sin errores de scripts y texturas. En la revisión final se han vuelto a comprobar ambas cámaras, la pausa y la animación. También se ha comprobado que el GLSL comentado, el minificado, los datos del visor y la constante del sistema coinciden, y que los enlaces locales de este README existen. No se ha probado manualmente el editor remoto de The Book of Shaders; el código utiliza su estructura estándar de fragment shader y uniforms.
 
 ## 9. Fuentes y referencias
 
