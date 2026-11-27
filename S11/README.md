@@ -12,7 +12,17 @@ Animación en **JavaScript vanilla con Three.js, Ammo.js y Tween.js**. Dentro de
 
 La física del montaje se calcula con Ammo.js. Tween.js anima la cámara. La firma aparece como marca de agua discreta, también en el vídeo.
 
-## 2. Demostración
+## 2. Capturas y demostración
+
+**[Ver la práctica en CodeSandbox](https://codesandbox.io/p/sandbox/busy-ben-96ym37)**
+
+![Casa de bloques construida dentro de otra casa](./capturas/captura.png)
+
+*Figura 1. Casa interior con paredes, ventanas, puerta y tejado.*
+
+![Animación del montaje y la entrada de cámara en la casa](./capturas/animacion.gif)
+
+*Figura 2. Un ciclo completo de construcción y entrada de cámara.*
 
 **[Ver el vídeo de la práctica](./capturas/demo.webm)**
 
@@ -40,17 +50,9 @@ Mantener visible la pestaña durante la grabación. La preparación inicial tard
 
 ## 5. Ejecución
 
-Desde `S11`, con Node.js instalado:
+La práctica está disponible en **[CodeSandbox](https://codesandbox.io/p/sandbox/busy-ben-96ym37)**. El punto de entrada es `index.html`, situado en la raíz, y las carpetas `src/` y `vendor/` conservan sus rutas relativas. No requiere instalar paquetes ni compilar: las bibliotecas están incluidas en `vendor/`.
 
-```sh
-node servidor.mjs
-```
-
-Abrir **http://127.0.0.1:8111/**. Para detener el servidor, pulsar **Ctrl+C**.
-
-También se puede abrir `index.html` con **Live Server**. No utilizar `file://`, porque se cargan módulos ES. No hace falta instalar paquetes ni compilar: las bibliotecas están en `vendor/`.
-
-Para CodeSandbox, subir el contenido de `S11` manteniendo sus rutas e `index.html` en la raíz.
+Para ejecutarlo en local, abrir `index.html` mediante **Live Server**. Los módulos ES requieren HTTP; no se ejecutan abriendo el archivo directamente con `file://`.
 
 ## 6. Desarrollo
 
@@ -77,15 +79,14 @@ Se utilizan `captureStream(30)` y `MediaRecorder`. La marca de agua se dibuja ta
 - `index.html` y `style.css`: visor y marca de agua.
 - `src/`: plano, física, geometría, cámara y animación.
 - `vendor/`: Three.js, Tween.js, Ammo.js y sus licencias.
-- `capturas/demo.webm`: vídeo para la entrega.
-- `servidor.mjs`: servidor local.
+- `capturas/`: imagen, GIF animado y vídeo de la práctica.
 - `README.md`: documentación de la práctica.
 
 ## 8. Verificación
 
-Durante el desarrollo se comprobaron gravedad, contactos, alturas de apilado, repetición del montaje y coincidencia del encuadre final con el inicial. También se revisó en el navegador la construcción y la entrada de cámara, sin errores de consola, y se decodificó el vídeo completo. Los archivos auxiliares de pruebas se retiraron de la entrega.
+Durante el desarrollo se comprobaron gravedad, contactos, alturas de apilado, repetición del montaje y coincidencia del encuadre final con el inicial. También se revisó en el navegador la construcción y la entrada de cámara, sin errores de consola, y se decodificó el vídeo completo.
 
-## 9. Fuentes y asistencia
+## 9. Fuentes
 
 - Material docente de Animación de la sesión 11, especialmente `script_45_ammo.js` para cuerpos rígidos, masas y sincronización física.
 - `script_41_tween.js` y `script_42_tween_cubos.js`: interpolación de la cámara.
@@ -93,6 +94,6 @@ Durante el desarrollo se comprobaron gravedad, contactos, alturas de apilado, re
 - [Three.js](https://github.com/mrdoob/three.js/tree/r160), versión 0.160.1; licencia MIT en `vendor/THREE-LICENSE.txt`.
 - [Tween.js](https://github.com/tweenjs/tween.js/tree/v23.1.3), versión 23.1.3; licencia MIT en `vendor/TWEEN-LICENSE.txt`.
 - [Ammo.js](https://github.com/kripken/ammo.js), distribución de `ammojs-typed` 1.0.6; licencia zlib en `vendor/AMMO-LICENSE.txt`.
-- Bloques tipo LEGO como referencia visual. La geometría y la idea de construcción recursiva se desarrollaron a partir de las indicaciones del autor.
+- Bloques tipo LEGO como referencia visual.
 
-El código y la documentación se prepararon con **asistencia de Codex**. Antes de la entrega debe añadirse el enlace compartido de esta conversación si se dispone de él y publicarse el proyecto en GitHub o CodeSandbox, junto al vídeo con autoría.
+Se ha utilizado **Codex (OpenAI)** como herramienta de apoyo durante el desarrollo de la práctica.
