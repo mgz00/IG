@@ -82,11 +82,7 @@ Se utilizan `captureStream(30)` y `MediaRecorder`. La marca de agua se dibuja ta
 - `capturas/`: imagen, GIF animado y vídeo de la práctica.
 - `README.md`: documentación de la práctica.
 
-## 8. Verificación
-
-Durante el desarrollo se comprobaron gravedad, contactos, alturas de apilado, repetición del montaje y coincidencia del encuadre final con el inicial. También se revisó en el navegador la construcción y la entrada de cámara, sin errores de consola, y se decodificó el vídeo completo.
-
-## 9. Fuentes
+## 8. Fuentes
 
 - Material docente de Animación de la sesión 11, especialmente `script_45_ammo.js` para cuerpos rígidos, masas y sincronización física.
 - `script_41_tween.js` y `script_42_tween_cubos.js`: interpolación de la cámara.
