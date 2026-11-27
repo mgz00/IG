@@ -1,4 +1,4 @@
-# CASA × CASA — Construcción recursiva con bloques
+# BRICKCEPTION 
 
 **Autor:** Marcos González Gómez  
 **Titulación:** Grado en Ingeniería Informática  
